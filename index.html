@@ -53,6 +53,7 @@ select,input[type=text]{width:100%;padding:7px;border:1px solid var(--line);bord
 .rec{background:var(--card);border-left:4px solid var(--ac2);padding:8px 14px}.err{color:#b00020}.hid{display:none}
 #herramienta h3{font-size:19px;margin:26px 0 6px}#herramienta h4{font:600 15px Inter,sans-serif;margin:14px 0 4px}#herramienta td,#herramienta th{text-align:right;white-space:nowrap}#herramienta td:first-child,#herramienta th:first-child{text-align:left}
 button:disabled{opacity:.5}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}.flow span{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font:600 14px Inter,sans-serif}.flow i{color:var(--ac2);font-style:normal}
 @media print{body *{display:none!important}}
 </style>
 </head>
@@ -119,14 +120,7 @@ button:disabled{opacity:.5}
 <div class="eq"><small>Función de arista: base + spline en B-splines</small>$$\varphi(x)=w_b\,\mathrm{silu}(x)+w_s\sum_{i}c_i\,B_i(x)$$</div>
 <div class="eq"><small>Pérdida con regularización de esparsidad (L1 y entropía)</small>$$\mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\Big(\mu_1\sum_{l}\lVert\Phi_l\rVert_1+\mu_2\sum_{l}S(\Phi_l)\Big)$$</div>
 <p>Los coeficientes $c_i$ y los pesos se aprenden por descenso de gradiente. La cuadrícula (<em>grid</em>) y el orden del spline $k$ controlan la flexibilidad de cada función. El flujo de trabajo recomendado es:</p>
-<pre class="mermaid">
-flowchart LR
-A["Entrenar con regularización"] --> B["Podar aristas y nodos débiles"]
-B --> C["Reentrenar la red reducida"]
-C --> D["Simbolizar: asignar sin, log, x², exp..."]
-D --> E["Reajustar parámetros afines"]
-E --> F["Fórmula cerrada"]
-</pre>
+<div class="flow"><span>1 · Entrenar con regularización</span><i>→</i><span>2 · Podar</span><i>→</i><span>3 · Reentrenar</span><i>→</i><span>4 · Simbolizar</span><i>→</i><span>5 · Reajustar</span><i>→</i><span>6 · Fórmula cerrada</span></div>
 </div></section>
 
 <section id="simbolica"><div class="w"><div class="tag">Regresión simbólica</div>
