@@ -174,7 +174,7 @@ print(model.symbolic_formula())</pre></section>
 import io, re, json, math
 import numpy as np, pandas as pd
 from collections import Counter
-from scipy import stats
+from scipy import stats, optimize
 
 def fmt(x, d=2):
     try:
@@ -230,7 +230,7 @@ def read_any(data, name):
         first = txt.splitlines()[0]
         sep = max(";,\t|", key=lambda c: first.count(c))
         df = pd.read_csv(io.StringIO(txt), sep=sep, dtype=object, engine="python", on_bad_lines="skip")
-    df.columns = [str(c).strip() for c in df.columns]
+    df.columns = [re.sub(r"\s+", " ", str(c)).strip() for c in df.columns]
     df = df.loc[:, [c for c in df.columns if c and not c.startswith("Unnamed")]]
     return df
 
